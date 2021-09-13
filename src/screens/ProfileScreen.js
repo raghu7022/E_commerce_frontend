@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../compnents/Message'
 import Loader from '../compnents/loader'
 import { getUserDetails, updateUserProfile } from '../action/userAction'
-import { listMyOrders } from '../action/orderActions'
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstnts'
 
-const ProfileScreen = ({ location, history }) => {
+
+const ProfileScreen = ({ history }) => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -29,9 +30,9 @@ const ProfileScreen = ({ location, history }) => {
         if (!userInfo) {
             history.push('/login')
         } else {
-            if (!user.name) {
+            if (!user) {
                 dispatch(getUserDetails('profile'))
-                dispatch(listMyOrders())
+                dispatch({ type: USER_UPDATE_PROFILE_RESET })
             } else {
                 setName(user.name)
                 setEmail(user.email)
@@ -72,10 +73,11 @@ const ProfileScreen = ({ location, history }) => {
                     <Form.Control type='password' placeholder='Enter Your Confirm Password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}></Form.Control>
                 </Form.Group>
                 <br />
-                <Button type='submit' variant='primary'>Update</Button>
+                <Button type='submit' variant='dark'>Update</Button>
             </Form>
         </Col>
     </Row>
 }
 
 export default ProfileScreen
+

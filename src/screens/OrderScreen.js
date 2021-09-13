@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
+import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../compnents/Message'
 import Loader from '../compnents/loader'
-import { getOrderDetails } from '../action/orderActions'
+import { getOrderDetails, payOrder, deliverOrder } from '../action/orderActions'
 
 
 const OrderScreen = ({ match }) => {
@@ -14,6 +14,15 @@ const OrderScreen = ({ match }) => {
 
     const orderDetails = useSelector((state) => state.orderDetails)
     const { order, loading, error } = orderDetails
+
+    const orderPay = useSelector((state) => state.orderPay)
+    const { loading: loadingPay, error: errorPay } = orderPay
+
+    const orderDeliver = useSelector((state) => state.orderDeliver)
+    const { loading: loadingDeliver, error: errorDeliver } = orderDeliver
+
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userInfo } = userLogin
 
     if (!loading) {
         const addDecimals = (num) => {
@@ -25,9 +34,15 @@ const OrderScreen = ({ match }) => {
 
     useEffect(() => {
         dispatch(getOrderDetails(orderId))
-        //eslint-disable-next-line
     }, [dispatch, orderId])
 
+    const paidHandler = () => {
+        dispatch(payOrder(order))
+    }
+
+    const deliverHandler = () => {
+        dispatch(deliverOrder(order))
+    }
 
     return loading ? <Loader /> : error ? <Message variant='warning'>{error}</Message> :
         <>
@@ -48,8 +63,8 @@ const OrderScreen = ({ match }) => {
                                 {order.shippingAddress.pinCode} ,
                                 {order.shippingAddress.country}
                             </p>
-                            {order.isDelivered ? (<Message variant='success'>Delivered On: {order.deliveredAt}</Message>) :
-                                (<Message variant='warning'>Not Delivered</Message>)}
+                            {order.isDelivered ? (<Message variant='' light>Delivered On: {order.deliveredAt}</Message>) :
+                                (<Message variant='light'>Not Delivered</Message>)}
 
                         </ListGroup.Item>
 
@@ -58,7 +73,7 @@ const OrderScreen = ({ match }) => {
                             <p><strong>Method: </strong>
                                 {order.paymentMethod}
                             </p>
-                            {order.isPaid ? (<Message variant='success'>Paid On: {order.paidAt}</Message>) : (<Message variant='warning'>Not Paid</Message>)}
+                            {order.isPaid ? (<Message variant='light'>Paid On: {order.paidAt}</Message>) : (<Message variant='light'>Not Paid</Message>)}
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <h1>Order Items</h1>
@@ -116,6 +131,23 @@ const OrderScreen = ({ match }) => {
                                     <Col>₹{order.totalPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
+                            {loadingDeliver && <Loader />}
+                            {loadingPay && <Loader />}
+                            {errorPay && <Message variant='danger'>{errorPay}</Message>}
+                            {errorDeliver && <Message variant='danger'>{errorDeliver}</Message>}
+                            {userInfo.isAdmin && !order.isPaid && !order.isDelivered && (
+                                <ListGroup.Item>
+                                    <Row>
+                                        <Button type='button' variant='dark' className='btn btn-block' onClick={paidHandler}>
+                                            Mark As Paid
+                                        </Button>
+                                        <Button type='button' variant='dark' className='btn btn-block' onClick={deliverHandler}>
+                                            Mark As Delivered
+                                        </Button>
+                                    </Row>
+                                </ListGroup.Item>
+
+                            )}
                         </ListGroup>
                     </Card>
                 </Col>
