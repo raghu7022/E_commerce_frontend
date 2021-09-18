@@ -44,7 +44,7 @@ const OrderScreen = ({ match }) => {
         dispatch(deliverOrder(order))
     }
 
-    return loading ? <Loader /> : error ? <Message variant='warning'>{error}</Message> :
+    return loading ? <Loader /> : error ? <Message variant='light'>{error}</Message> :
         <>
             <h1>Order Id:{order._id}</h1>
             <Row>
@@ -63,7 +63,7 @@ const OrderScreen = ({ match }) => {
                                 {order.shippingAddress.pinCode} ,
                                 {order.shippingAddress.country}
                             </p>
-                            {order.isDelivered ? (<Message variant='' light>Delivered On: {order.deliveredAt}</Message>) :
+                            {order.isDelivered ? (<Message variant='success' >Delivered On: {order.deliveredAt.substring(0, 10)}</Message>) :
                                 (<Message variant='light'>Not Delivered</Message>)}
 
                         </ListGroup.Item>
@@ -73,7 +73,7 @@ const OrderScreen = ({ match }) => {
                             <p><strong>Method: </strong>
                                 {order.paymentMethod}
                             </p>
-                            {order.isPaid ? (<Message variant='light'>Paid On: {order.paidAt}</Message>) : (<Message variant='light'>Not Paid</Message>)}
+                            {order.isPaid ? (<Message variant='success'>Paid On: {order.paidAt.substring(0, 10)}</Message>) : (<Message variant='light'>Not Paid</Message>)}
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <h1>Order Items</h1>
@@ -135,12 +135,18 @@ const OrderScreen = ({ match }) => {
                             {loadingPay && <Loader />}
                             {errorPay && <Message variant='danger'>{errorPay}</Message>}
                             {errorDeliver && <Message variant='danger'>{errorDeliver}</Message>}
-                            {userInfo.isAdmin && !order.isPaid && !order.isDelivered && (
+                            {userInfo.isAdmin && !order.isPaid && (
                                 <ListGroup.Item>
                                     <Row>
                                         <Button type='button' variant='dark' className='btn btn-block' onClick={paidHandler}>
                                             Mark As Paid
                                         </Button>
+                                    </Row>
+                                </ListGroup.Item>
+                            )}
+                            {userInfo.isAdmin && !order.isDelivered && (
+                                <ListGroup.Item>
+                                    <Row>
                                         <Button type='button' variant='dark' className='btn btn-block' onClick={deliverHandler}>
                                             Mark As Delivered
                                         </Button>
