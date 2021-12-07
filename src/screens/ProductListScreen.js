@@ -57,10 +57,10 @@ const ProductListScreen = ({ history, match }) => {
                 </Col>
             </Row>
             {loadingDelete && <Loader />}
-            {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+            {errorDelete && <Message variant='warning'>{errorDelete}</Message>}
             {loadingCreate && <Loader />}
-            {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
-            {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
+            {errorCreate && <Message variant='warning'>{errorCreate}</Message>}
+            {loading ? <Loader /> : error ? <Message variant='warning'>{error}</Message> : (
                 <>
                     <Table striped bordered hover resource className='table-sm'>
                         <thead>
@@ -70,8 +70,8 @@ const ProductListScreen = ({ history, match }) => {
                                 <th>PRICE</th>
                                 <th>CATEGORY</th>
                                 <th>BRAND</th>
-                                <th></th>
-                                <th></th>
+                                <th>EDIT</th>
+                                <th>DELETE</th>
                             </tr>
                         </thead>
                         <tbody>

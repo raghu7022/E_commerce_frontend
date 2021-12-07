@@ -46,7 +46,7 @@ const OrderScreen = ({ match }) => {
 
     return loading ? <Loader /> : error ? <Message variant='light'>{error}</Message> :
         <>
-            <h1>Order Id:{order._id}</h1>
+            <h1 id='orderId'>Order Id:{order._id}</h1>
             <Row>
                 <Col md={8}>
                     <ListGroup variant='flush'>
@@ -144,7 +144,7 @@ const OrderScreen = ({ match }) => {
                                     </Row>
                                 </ListGroup.Item>
                             )}
-                            {userInfo.isAdmin && !order.isDelivered && (
+                            {userInfo.isAdmin && !order.isDelivered && order.isPaid && (
                                 <ListGroup.Item>
                                     <Row>
                                         <Button type='button' variant='dark' className='btn btn-block' onClick={deliverHandler}>

@@ -26,7 +26,7 @@ const OrderListScreen = ({ history }) => {
     return (
         <>
             <h1>Orders</h1>
-            {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
+            {loading ? <Loader /> : error ? <Message variant='warning'>{error}</Message> : (
                 <Table striped bordered hover resource className='table-sm'>
                     <thead>
                         <tr>
@@ -48,13 +48,13 @@ const OrderListScreen = ({ history }) => {
                                 <td>₹{order.totalPrice}</td>
                                 <td>
                                     {order.isPaid ? (
-                                        order.paidAt.subString(0, 10)
+                                        <i className='fas fa-check' style={{ color: 'green' }}></i>
                                     ) : (
                                         <i className='fas fa-times' style={{ color: 'red' }}></i>)}
                                 </td>
                                 <td>
                                     {order.isDelivered ? (
-                                        order.deliveredAt.subString(0, 10)
+                                        <i className='fas fa-check' style={{ color: 'green' }}></i>
                                     ) : (
                                         <i className='fas fa-times' style={{ color: 'red' }}></i>)}
                                 </td>

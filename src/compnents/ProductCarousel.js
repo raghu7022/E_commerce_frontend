@@ -19,7 +19,7 @@ const ProductCarousel = () => {
     return loading ? (
         <Loader />
     ) : error ? (
-        <Message variant='danger'>{error}</Message>
+        <Message variant='warning'>{error}</Message>
     ) : (
         <Carousel fade pause='hover' className='bg-dark'>
             {products.map((product) => (
@@ -27,7 +27,7 @@ const ProductCarousel = () => {
                     <Link to={`/product/${product._id}`}>
                         <Image src={product.image} alt={product.name} fluid />
                         <Carousel.Caption className='carousel-caption'>
-                            <h2>
+                            <h2 id='productName'>
                                 {product.name} (₹{product.price})
                             </h2>
                         </Carousel.Caption>

@@ -117,7 +117,7 @@ const PlaceOrderScreen = ({ history }) => {
                                 {error && <Message variant='danger'>{error}</Message>}
                             </ListGroup.Item>
                             <ListGroup.Item>
-                                <Button type='button' variant='dark' className='btn-block' disabled={cart.cartItems.length === 0}
+                                <Button type='button' variant='dark' id='order' className='btn-block' disabled={cart.cartItems.length === 0}
                                     onClick={PlaceOrderHandler}> Place Order</Button>
                             </ListGroup.Item>
                         </ListGroup>

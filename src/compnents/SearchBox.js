@@ -17,12 +17,12 @@ const SearchBox = ({ history }) => {
         <Form onSubmit={submitHandler} inline>
             <Row >
                 <Col md={11}>
-                    <Form.Control type='text' name='q' onChange={(e) => setKeyword(e.target.value)}
+                    <Form.Control type='text' name='q' id='searchBox' onChange={(e) => setKeyword(e.target.value)}
                         placeholder='Search Products...' className='mr-sm-2 ml-sm-5'>
                     </Form.Control>
                 </Col>
                 <Col md={1}>
-                    <Button type='submit' variant='secondary' >Search</Button>
+                    <Button type='submit' variant='secondary' id='search'>Search</Button>
                 </Col>
             </Row>
         </Form>

@@ -38,7 +38,7 @@ const PaymentScreen = ({ history }) => {
                     </Col>
                 </Form.Group>
                 <br />
-                <Button type='submit' variant='dark' onClick={submitHandler}> Continue To Place Order</Button>
+                <Button type='submit' variant='dark' id='placeOrder' onClick={submitHandler}> Continue To Place Order</Button>
             </Form>
         </FormContainer>
     )

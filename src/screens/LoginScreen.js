@@ -25,8 +25,8 @@ const LoginScreen = ({ location, history }) => {
     }
     return (
         <FormContainer>
-            <h1>Sign In</h1>
-            {error && <Message variant='danger'>{error}</Message>}
+            <h1 id='signIn'>Sign In</h1>
+            {error && <Message variant='warning'>{error}</Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='emali'>
@@ -38,7 +38,7 @@ const LoginScreen = ({ location, history }) => {
                     <Form.Control type='password' placeholder='Enter Your Password' value={password} onChange={(e) => setPassword(e.target.value)}></Form.Control>
                 </Form.Group>
                 <br />
-                <Button type='submit' variant='dark'>Sign In</Button>
+                <Button type='submit' id='SignInBtn' variant='dark'>Sign In</Button>
             </Form>
             <Row className='py-3'>
                 <Col>New Customer?{''}<Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>Register</Link>

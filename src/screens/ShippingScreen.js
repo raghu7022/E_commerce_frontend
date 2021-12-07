@@ -42,7 +42,7 @@ const ShippingScreen = ({ history }) => {
                     <Form.Control type='text' placeholder='Enter Your Country' value={country} onChange={(e) => stateCountry(e.target.value)}></Form.Control>
                 </Form.Group>
                 <br />
-                <Button type='submit' variant='dark'> Continue To Payment</Button>
+                <Button type='submit' id='payment' variant='dark'> Continue To Payment</Button>
             </Form>
         </FormContainer>
     )

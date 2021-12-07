@@ -27,37 +27,40 @@ const Header = () => {
                         <Route render={({ history }) => <SearchBox history={history} />} />
                         <div className='nav'>
                             <Nav className='ml-auto '>
-                                <LinkContainer to="/cart">
+                                <LinkContainer to="/cart" id='cart'>
                                     <Nav.Link> <i className="fas fa-shopping-cart"></i> Cart</Nav.Link>
+                                </LinkContainer>
+                                <LinkContainer to="/bundle" id='bundle'>
+                                    <Nav.Link> <i className="fas fa-box"></i> Bundle</Nav.Link>
                                 </LinkContainer>
                                 {userInfo ? (
                                     <NavDropdown title={userInfo.name} id='username'>
                                         <LinkContainer to='/profile'>
-                                            <NavDropdown.Item>profile</NavDropdown.Item>
+                                            <NavDropdown.Item >profile</NavDropdown.Item>
                                         </LinkContainer>
-                                        <LinkContainer to='/myorders'>
+                                        <LinkContainer to='/myorders' id='myorders'>
                                             <NavDropdown.Item>My Orders</NavDropdown.Item>
                                         </LinkContainer>
-                                        <LinkContainer to='/login'>
+                                        <LinkContainer to='/login' id='LogOut' >
                                             <NavDropdown.Item onClick={logoutHandler}>
                                                 Logout
                                             </NavDropdown.Item>
                                         </LinkContainer>
                                     </NavDropdown>
                                 ) : (
-                                    <LinkContainer to="/login">
+                                    <LinkContainer to="/login" id='Login'>
                                         <Nav.Link> <i className="fas fa-user"></i>Sign In</Nav.Link>
                                     </LinkContainer>
                                 )}
                                 {userInfo && userInfo.isAdmin && (
                                     <NavDropdown title='Admin' id='adminmenu'>
-                                        <LinkContainer to='/admin/userlist'>
+                                        <LinkContainer to='/admin/userlist' id='users'>
                                             <NavDropdown.Item>users</NavDropdown.Item>
                                         </LinkContainer>
-                                        <LinkContainer to='/admin/productlist'>
+                                        <LinkContainer to='/admin/productlist' id='products'>
                                             <NavDropdown.Item>Products</NavDropdown.Item>
                                         </LinkContainer>
-                                        <LinkContainer to='/admin/orderlist'>
+                                        <LinkContainer to='/admin/orderlist' id='orders'>
                                             <NavDropdown.Item>Orders</NavDropdown.Item>
                                         </LinkContainer>
                                     </NavDropdown>

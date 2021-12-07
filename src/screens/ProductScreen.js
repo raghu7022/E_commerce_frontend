@@ -71,7 +71,7 @@ const ProductScreen = ({ history, match }) => {
                                         value={product.ratings}
                                         text={`${product.numReviews} reviews `} />
                                     <ListGroup.Item>
-                                        <h6><strong>Descripton: </strong>{product.descripton}</h6>
+                                        <h6><strong>Descripton: </strong>{product.description}</h6>
                                     </ListGroup.Item>
                                 </ListGroup.Item>
                             </ListGroup>
@@ -116,7 +116,7 @@ const ProductScreen = ({ history, match }) => {
                                     )}
 
                                     <ListGroup.Item>
-                                        <Button onClick={addToCartHandler} className='btn-block' type='button' variant='dark' disabled={product.countInStock === 0}>
+                                        <Button onClick={addToCartHandler} id='AddToCart' className='btn-block' type='button' variant='dark' disabled={product.countInStock === 0}>
                                             Add To Cart
                                         </Button>
                                     </ListGroup.Item>
@@ -158,7 +158,7 @@ const ProductScreen = ({ history, match }) => {
                                                 <Form.Control as='textarea' row='4' value={comment} onChange={(e) => setComment(e.target.value)}>
                                                 </Form.Control>
                                             </Form.Group>
-                                            <Button type='submit' variant='dark'>Submit</Button>
+                                            <Button type='submit' id='Submit' variant='dark'>Submit</Button>
                                         </Form>
                                     ) : (
                                         <Message>Please <Link to='/login'> Sign In </Link> to write a review </Message>)}

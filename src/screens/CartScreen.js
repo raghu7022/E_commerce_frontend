@@ -59,7 +59,7 @@ const CartScreen = ({ match, location, history }) => {
                                         </Form.Control>
                                     </Col>
                                     <Col md={2}>
-                                        <Button type='button' variant=' light' onClick={() => removeFromCartHandler(item.product)}>
+                                        <Button type='button' variant='light' id='delete' onClick={() => removeFromCartHandler(item.product)}>
                                             <i className='fas fa-trash'></i>
                                         </Button>
                                     </Col>
@@ -79,7 +79,7 @@ const CartScreen = ({ match, location, history }) => {
                             Total price: ₹ {cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <Button type='button' variant='dark' disabled={cartItems.length === 0} onClick={checkoutHandler}>
+                            <Button type='button' variant='dark' id='proceed' disabled={cartItems.length === 0} onClick={checkoutHandler}>
                                 Proceed
                             </Button>
                         </ListGroup.Item>
